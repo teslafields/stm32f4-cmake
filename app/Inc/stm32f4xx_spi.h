@@ -1,8 +1,12 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_ComPolling/Inc/main.h
+  * @file    stm32f4xx_nucleo.h
   * @author  MCD Application Team
-  * @brief   Header for main.c module
+  * @brief   This file contains definitions for:
+  *          - LEDs and push-button available on STM32F4XX-Nucleo Kit
+  *            from STMicroelectronics
+  *          - LCD, joystick and microSD available on Adafruit 1.8" TFT LCD
+  *            shield (reference ID 802)
   ******************************************************************************
   * @attention
   *
@@ -17,18 +21,19 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __MAIN_H
-#define __MAIN_H
+#ifndef __STM32F4XX_SPI_H
+#define __STM32F4XX_SPI_H
 
-/* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_nucleo.h"
-#include "stm32f4xx_spi.h"
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
-/* Size of buffer */
-#define BUFFERSIZE                       (COUNTOF(aTxBuffer) - 1)
+void       SPIx_Init(void);
+void       SPIx_Write(uint8_t Value);
+void       SPIx_WriteReadData(const uint8_t *DataIn, uint8_t *DataOut, uint16_t DataLegnth);
 
-/* Exported macro ------------------------------------------------------------*/
-#define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
-/* Exported functions ------------------------------------------------------- */
+#ifdef __cplusplus
+}
+#endif
 
-#endif /* __MAIN_H */
+#endif /* __STM32F4XX_NUCLEO_H */

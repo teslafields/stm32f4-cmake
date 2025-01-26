@@ -41,7 +41,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
 
 add_executable(stm32f4_app
     ${PROJECT_SOURCE_DIR}/app/Src/main.c
-    ${PROJECT_SOURCE_DIR}/app/Src/stm32f4xx_hal_msp.c
+    ${PROJECT_SOURCE_DIR}/app/Src/stm32f4xx_spi.c
     ${PROJECT_SOURCE_DIR}/app/Src/stm32f4xx_it.c
     ${PROJECT_SOURCE_DIR}/app/Src/system_stm32f4xx.c
     ${startup_assembly}
@@ -49,10 +49,4 @@ add_executable(stm32f4_app
 
 include_directories(${PROJECT_SOURCE_DIR}/app/Inc)
 
-target_include_directories(stm32f4_app PUBLIC
-	${PROJECT_SOURCE_DIR}/STM32CubeF4/Drivers/BSP/STM32F4xx-Nucleo
-	${PROJECT_SOURCE_DIR}/STM32CubeF4/Drivers/BSP/STM32F446E_EVAL
-	${PROJECT_SOURCE_DIR}/STM32CubeF4/Drivers/BSP/STM32F4-Discovery
-)
-
-target_link_libraries(stm32f4_app STM32F4xx_HAL_Driver STM32F4xx_Nucleo)
+target_link_libraries(stm32f4_app STM32F4xx_HAL STM32F4xx_Nucleo)

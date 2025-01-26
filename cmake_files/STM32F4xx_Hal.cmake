@@ -11,7 +11,7 @@ option(STM32F4_I2C "Build STM32F4_I2C" OFF)
 option(STM32F4_SPI "Build STM32F4_SPI" OFF)
 option(STM32F4_MISC "Build STM32F4_MISC" OFF)
 
-add_library(STM32F4xx_HAL_Driver 
+add_library(STM32F4xx_HAL 
     ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
     ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
     ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
@@ -19,17 +19,20 @@ add_library(STM32F4xx_HAL_Driver
     ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
     ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
     ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_pwr.c
+    ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
+    ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
+    ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c
     )
 
 if(STM32F4_GPIO)
-    target_sources(STM32F4xx_HAL_Driver PUBLIC
+    target_sources(STM32F4xx_HAL PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_gpio.c
         )
 endif()
 
 if(STM32F4_I2C)
-    target_sources(STM32F4xx_HAL_Driver PUBLIC
+    target_sources(STM32F4xx_HAL PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_i2c.c
         )
@@ -37,14 +40,14 @@ endif()
 
 if(STM32F4_SPI)
     set(STM32F4_DMA ON)
-    target_sources(STM32F4xx_HAL_Driver PUBLIC
+    target_sources(STM32F4xx_HAL PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_spi.c
         )
 endif()
 
 if(STM32F4_DMA)
-    target_sources(STM32F4xx_HAL_Driver PUBLIC
+    target_sources(STM32F4xx_HAL PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c
@@ -54,7 +57,7 @@ if(STM32F4_DMA)
 endif()
 
 if(STM32F4_MISC)
-    target_sources(STM32F4xx_HAL_Driver PUBLIC
+    target_sources(STM32F4xx_HAL PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c
@@ -70,9 +73,6 @@ if(STM32F4_MISC)
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dsi.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_eth.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
-        ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
-        ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
-        ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_fmpi2c.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_fmpi2c_ex.c
         ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_fmpsmbus.c
@@ -130,8 +130,8 @@ if(STM32F4_MISC)
 endif()
 
 
-target_include_directories(STM32F4xx_HAL_Driver PUBLIC
+target_include_directories(STM32F4xx_HAL PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/../STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Inc
     )
 
-target_link_libraries(STM32F4xx_HAL_Driver CMSIS)
+target_link_libraries(STM32F4xx_HAL CMSIS)

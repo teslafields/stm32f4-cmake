@@ -36,10 +36,6 @@
 /* Uncomment this line to use the board as master, if not it is used as slave */
 #define MASTER_BOARD
 
-/* Private variables ---------------------------------------------------------*/
-/* SPI handler declaration */
-SPI_HandleTypeDef SpiHandle;
-
 /* Buffer used for transmission */
 uint8_t aTxBuffer[] = "****SPI - Two Boards communication based on Polling **** SPI Message ******** SPI Message ******** SPI Message ****";
 
@@ -75,7 +71,7 @@ int main(void)
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
-  SD_IO_Init();
+  SPIx_Init();
 
 #ifdef MASTER_BOARD
   /* Configure USER Button */
@@ -95,11 +91,15 @@ int main(void)
   /* While the SPI in TransmitReceive process, user can transmit data through
      "aTxBuffer" buffer & receive data through "aRxBuffer" */
   /* Timeout is set to 5S */
-  SD_IO_WriteReadData((uint8_t*)aTxBuffer, (uint8_t *)aRxBuffer, BUFFERSIZE);
+  SPIx_WriteReadData((uint8_t*)aTxBuffer, (uint8_t *)aRxBuffer, BUFFERSIZE);
+
+  HAL_Delay(2000);
 
   /* Infinite loop */
   while (1)
   {
+    BSP_LED_Toggle(LED2);
+    HAL_Delay(40);
   }
 }
 
